@@ -32,6 +32,18 @@ If you created an admin user with the username **peter**, the password **tomatoe
 TRUCKS_DB_URI="mongodb+srv://peter:tomatoes@cluster.zzrcw.mongodb.net/trucks?retryWrites=true&w=majority"
 ```
 
+- Add another line in the **.env** file as follows:
+
+```bash
+TRUCKS_NS="<your collection name>"
+```
+
+For example, if your collection name is **trucks**, then the second line in your **.env** file should look like this:
+
+```bash
+TRUCKS_NS="trucks"
+```
+
 - To start the development environment and test the code, run:
 
 ```bash
