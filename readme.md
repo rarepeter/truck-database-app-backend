@@ -2,6 +2,7 @@
 - Basic router functionality
 - GET, POST, PUT, DELETE requests
 - Separation of backend services, router and controllers
+- Connection to a **MongoDB** database using the **Mongoose** library
 
 # How to use
 - Clone the repository to your file system;
