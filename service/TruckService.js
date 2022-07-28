@@ -4,33 +4,39 @@ import Truck from '../schemas/Truck.js'
 
 class TruckService {
     async create(truck) {
+        console.log(truck)
+        const { truckBrand: brand, truckModel: model, truckEngine: engine, truckLicensePlate: licensePlate, truckColor: color } = truck;
         const newTruck = {
             id: uuidv4(),
-            ...truck
+            brand,
+            model,
+            engine,
+            licensePlate,
+            color
         }
         const createdTruck = await Truck.create(newTruck)
         return createdTruck
     }
 
     async getAll() {
-        const posts = await Truck.find()
-        return posts
+        const trucks = await Truck.find()
+        return trucks
     }
 
     async getOne(id) {
-        const post = await Truck.findOne({ id })
-        return post
+        const truck = await Truck.findOne({ id })
+        return truck
     }
 
-    async update(post) {
-        const id = post.id
-        const updatedPost = await Truck.findOneAndUpdate({ id }, post, { new: true })
-        return updatedPost
+    async update(truck) {
+        const id = truck.id
+        const updatedTruck = await Truck.findOneAndUpdate({ id }, truck, { new: true })
+        return updatedTruck
     }
 
     async delete(id) {
-        const deletedPost = await Truck.findOneAndDelete({ id })
-        return deletedPost
+        const deletedTruck = await Truck.findOneAndDelete({ id })
+        return deletedTruck
     }
 }
 

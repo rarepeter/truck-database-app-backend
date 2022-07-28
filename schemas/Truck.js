@@ -8,7 +8,11 @@ const Truck = new mongoose.Schema({
     brand: { type: String, required: true },
     model: { type: String, required: true },
     engine: { type: String, required: true },
-    picture: { type: String }
-})
+    licensePlate: { type: String, required: true },
+    color: { type: String, required: true },
+    picture: { type: String },
+    activeDrivers: { type: Array, default: [] }
+}, { timestamps: true }
+)
 
 export default mongoose.model(process.env.TRUCKS_NS, Truck)

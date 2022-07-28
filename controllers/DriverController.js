@@ -1,12 +1,12 @@
 import { startConnection } from '../routers/router.js'
-import TruckService from '../service/TruckService.js'
+import DriverService from '../service/DriverService.js'
 
-class TruckController {
+class DriverController {
     async create(req, res) {
         try {
             startConnection()
-            const createdTruck = await TruckService.create(req.body)
-            return res.status(201).json(createdTruck)
+            const createdDriver = await DriverService.create(req.body)
+            return res.status(201).json(createdDriver)
         } catch (e) {
             console.log(e)
         }
@@ -15,8 +15,8 @@ class TruckController {
     async getAll(req, res) {
         try {
             startConnection()
-            const trucks = await TruckService.getAll()
-            return res.json(trucks)
+            const drivers = await DriverService.getAll()
+            return res.json(drivers)
         } catch (e) {
             console.log(e)
         }
@@ -26,8 +26,8 @@ class TruckController {
         try {
             const { id } = req.params
             startConnection()
-            const truck = await TruckService.getOne(id)
-            return res.status(200).json(truck)
+            const driver = await DriverService.getOne(id)
+            return res.status(200).json(driver)
         } catch (e) {
             console.log(e)
         }
@@ -36,9 +36,9 @@ class TruckController {
     async update(req, res) {
         try {
             startConnection()
-            const truck = req.body
-            const updatedTruck = await TruckService.update(truck)
-            return res.status(200).json(updatedTruck)
+            const driver = req.body
+            const updatedDriver = await DriverService.update(driver)
+            return res.status(200).json(updatedDriver)
         } catch (e) {
             console.log(e)
         }
@@ -48,12 +48,12 @@ class TruckController {
         try {
             startConnection()
             const { id } = req.params
-            const deletedTruck = await TruckService.delete(id)
-            return res.status(200).json(deletedTruck)
+            const deletedDriver = await DriverService.delete(id)
+            return res.status(200).json(deletedDriver)
         } catch (e) {
             console.log(e)
         }
     }
 }
 
-export default new TruckController();
+export default new DriverController();
