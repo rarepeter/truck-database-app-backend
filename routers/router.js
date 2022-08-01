@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 
 import TruckController from '../controllers/TruckController.js'
 import DriverController from '../controllers/DriverController.js'
+import DeliveryController from '../controllers/DeliveryController.js'
 
 dotenv.config()
 
@@ -32,6 +33,12 @@ router.get('/drivers', DriverController.getAll)
 router.get('/drivers/:id', DriverController.getOne)
 router.put('/drivers', DriverController.update)
 router.delete('/drivers/:id', DriverController.delete)
+
+router.post('/deliveries', DeliveryController.create)
+router.get('/deliveries', DeliveryController.getAll)
+router.get('/deliveries/:id', DeliveryController.getOne)
+router.put('/deliveries', DeliveryController.update)
+router.delete('/deliveries/:id', DeliveryController.delete)
 
 export default router;
 export { startConnection }
