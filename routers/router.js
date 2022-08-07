@@ -40,5 +40,11 @@ router.get('/deliveries/:id', DeliveryController.getOne)
 router.put('/deliveries', DeliveryController.update)
 router.delete('/deliveries/:id', DeliveryController.delete)
 
+
+
+// router.post('/upload', (res, req) => {
+//     console.log(req.headers);
+// })
+
 export default router;
 export { startConnection }
