@@ -18,23 +18,3 @@ app.use('/', router)
 app.listen(PORT, () => {
     console.log(`Refresh succesful on port ${PORT}!`)
 })
-
-//
-import multer from 'multer'
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './images')
-    },
-
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + file.originalname)
-    }
-})
-
-const upload = multer({ storage: storage })
-
-app.post('/upload', upload.single('image'), (req, res) => {
-    res.status(201)
-    console.log(req.file)
-})

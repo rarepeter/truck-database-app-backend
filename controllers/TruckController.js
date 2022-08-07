@@ -6,6 +6,9 @@ class TruckController {
         try {
             startConnection()
             const createdTruck = await TruckService.create(req.body)
+            console.log(createdTruck)
+            req.ui = createdTruck.id
+            console.log(req.ui)
             return res.status(201).json(createdTruck)
         } catch (e) {
             console.log(e)
