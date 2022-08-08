@@ -26,7 +26,7 @@ const startConnection = () => {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, `./images`)
+        cb(null, `./images/avatars`)
     },
 
     filename: (req, file, cb) => {
@@ -36,11 +36,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.post('/upload-image', upload.single('image'), (req, res) => {
+router.post('/upload-avatar', upload.single('image'), (req, res) => {
     if (req.file) {
-        fs.renameSync(req.file.path, 'images/' + req.body.id + '.png');
+        fs.renameSync(req.file.path, 'images/avatars/' + req.body.id + '-avatar.png');
     }
-    console.log(req.file)
     return res.status(201)
 })
 
