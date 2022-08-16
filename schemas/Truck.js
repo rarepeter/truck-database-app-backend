@@ -11,7 +11,7 @@ const Truck = new mongoose.Schema({
     licensePlate: { type: String, required: true },
     color: { type: String, required: true },
     picture: { type: String },
-    activeDrivers: { type: Array, default: [] }
+    activeDrivers: { type: String, default: '' }
 }, { timestamps: true }
 )
 
