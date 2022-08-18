@@ -15,10 +15,11 @@ const URI = process.env.TRUCKS_DB_URI
 
 const router = new Router()
 
-const startConnection = () => {
+const startConnection = (req, res, next) => {
     try {
         mongoose.connect(URI)
         console.log('Connected')
+        next()
     } catch (e) {
         console.log(e)
     }
@@ -43,23 +44,23 @@ router.post('/upload-avatar', upload.single('image'), (req, res) => {
     return res.status(201)
 })
 
-router.post('/trucks', TruckController.create)
-router.get('/trucks', TruckController.getAll)
-router.get('/trucks/:id', TruckController.getOne)
-router.put('/trucks', TruckController.update)
-router.delete('/trucks/:id', TruckController.delete)
+router.post('/trucks', startConnection, TruckController.create)
+router.get('/trucks', startConnection, TruckController.getAll)
+router.get('/trucks/:id', startConnection, TruckController.getOne)
+router.put('/trucks', startConnection, TruckController.update)
+router.delete('/trucks/:id', startConnection, TruckController.delete)
 
-router.post('/drivers', DriverController.create)
-router.get('/drivers', DriverController.getAll)
-router.get('/drivers/:id', DriverController.getOne)
-router.put('/drivers', DriverController.update)
-router.delete('/drivers/:id', DriverController.delete)
+router.post('/drivers', startConnection, DriverController.create)
+router.get('/drivers', startConnection, DriverController.getAll)
+router.get('/drivers/:id', startConnection, DriverController.getOne)
+router.put('/drivers', startConnection, DriverController.update)
+router.delete('/drivers/:id', startConnection, DriverController.delete)
 
-router.post('/deliveries', DeliveryController.create)
-router.get('/deliveries', DeliveryController.getAll)
-router.get('/deliveries/:id', DeliveryController.getOne)
-router.put('/deliveries', DeliveryController.update)
-router.delete('/deliveries/:id', DeliveryController.delete)
+router.post('/deliveries', startConnection, DeliveryController.create)
+router.get('/deliveries', startConnection, DeliveryController.getAll)
+router.get('/deliveries/:id', startConnection, DeliveryController.getOne)
+router.put('/deliveries', startConnection, DeliveryController.update)
+router.delete('/deliveries/:id', startConnection, DeliveryController.delete)
 
 export default router;
 export { startConnection }
