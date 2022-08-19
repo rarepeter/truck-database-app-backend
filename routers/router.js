@@ -6,6 +6,7 @@ import multer from 'multer'
 import TruckController from '../controllers/TruckController.js'
 import DriverController from '../controllers/DriverController.js'
 import DeliveryController from '../controllers/DeliveryController.js'
+import UserController from '../controllers/UserController.js'
 
 import fs from 'fs'
 
@@ -61,6 +62,12 @@ router.get('/deliveries', startConnection, DeliveryController.getAll)
 router.get('/deliveries/:id', startConnection, DeliveryController.getOne)
 router.put('/deliveries', startConnection, DeliveryController.update)
 router.delete('/deliveries/:id', startConnection, DeliveryController.delete)
+
+router.post('/sign-up', UserController.registration)
+router.post('/login', UserController.login)
+router.post('/logout', UserController.logout)
+router.get('/activate/:link', UserController.activate)
+router.get('/refresh', UserController.refresh)
 
 export default router;
 export { startConnection }
