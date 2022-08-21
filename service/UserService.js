@@ -11,7 +11,7 @@ class UserService {
             throw new Error('The user with this email already exists')
         }
         const hashedPassword = await bcrypt.hash(password, 3)
-        const activationLink = uuid.v4()
+        const activationLink = uuidv4()
         const user = await User.create({ email, password: hashedPassword, activationLink })
         await mailService.sendActivationMail(email, activationLink)
         const userDto = new UserDto(user)

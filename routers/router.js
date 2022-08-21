@@ -63,11 +63,11 @@ router.get('/deliveries/:id', startConnection, DeliveryController.getOne)
 router.put('/deliveries', startConnection, DeliveryController.update)
 router.delete('/deliveries/:id', startConnection, DeliveryController.delete)
 
-router.post('/sign-up', UserController.registration)
-router.post('/login', UserController.login)
-router.post('/logout', UserController.logout)
-router.get('/activate/:link', UserController.activate)
-router.get('/refresh', UserController.refresh)
+router.post('/sign-up', startConnection, UserController.registration)
+router.post('/login', startConnection, UserController.login)
+router.post('/logout', startConnection, UserController.logout)
+router.get('/activate/:link', startConnection, UserController.activate)
+router.get('/refresh', startConnection, UserController.refresh)
 
 export default router;
 export { startConnection }
