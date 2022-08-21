@@ -14,15 +14,15 @@ class UserService {
         const activationLink = uuidv4()
 
         const user = await User.create({ email, password: hashedPassword, activationLink })
-        // await mailService.sendActivationMail(email, `http://localhost:5000/activate/${activationLink}`)
-
+        // await mailService.sendActivationMail(email, `${process.env.SRV_ADDRESS}/activate/${activationLink}`)
+        
         const userDto = new UserDto(user)
         const tokens = TokenService.generateTokens({ ...userDto })
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
-
+        
         return { ...tokens, user: userDto }
     }
-
+    
     async activate(activationLink) {
         const user = await User.findOne({ activationLink })
         if (!user) {
@@ -47,6 +47,11 @@ class UserService {
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
         return { ...tokens, user: userDto }
+    }
+
+    async logout(refreshToken) {
+        const token = await TokenService.removeToken(refreshToken)
+        return token
     }
 }
 
