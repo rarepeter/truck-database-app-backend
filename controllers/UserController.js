@@ -4,9 +4,7 @@ class UserController {
     async registration(req, res, next) {
         try {
             const { email, password } = req.body
-            console.log(email, password)
             const userData = await UserService.registration(email, password)
-            console.log(userData)
 
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 3 * 24 * 60 * 60 * 1000, httpOnly: true })
             return res.json(userData)
@@ -17,7 +15,11 @@ class UserController {
 
     async login(req, res, next) {
         try {
+            const { email, password } = req.body
+            const userData = await UserService.login(email, password)
 
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 3 * 24 * 60 * 60 * 1000, httpOnly: true })
+            return res.json(userData)
         } catch (e) {
 
         }
@@ -35,10 +37,11 @@ class UserController {
         try {
             const activationLink = req.params.link
             UserService.activate(activationLink)
+            return res.redirect("http://localhost:3000")
+            // return res.json("Activated")
         } catch (e) {
             console.log(e)
         }
-        return res.json("Activated")
     }
 
     async refresh(req, res, next) {

@@ -14,7 +14,7 @@ class UserService {
         const activationLink = uuidv4()
 
         const user = await User.create({ email, password: hashedPassword, activationLink })
-        await mailService.sendActivationMail(email, `http://localhost:5000/activate/${activationLink}`)
+        // await mailService.sendActivationMail(email, `http://localhost:5000/activate/${activationLink}`)
 
         const userDto = new UserDto(user)
         const tokens = TokenService.generateTokens({ ...userDto })
@@ -30,6 +30,23 @@ class UserService {
         }
         user.isActivated = true
         user.save()
+    }
+
+    async login(email, password) {
+        const user = await User.findOne({ email })
+        if (!user) {
+            throw new Error("User not found")
+        }
+        const isPassEqual = bcrypt.compare(password, user.password)
+        if (!user) {
+            throw new Error("Password is incorrect")
+        }
+        const userDto = new UserDto(user)
+        const tokens = TokenService.generateTokens({ ...userDto })
+
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+        return { ...tokens, user: userDto }
     }
 }
 
