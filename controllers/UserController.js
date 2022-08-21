@@ -33,10 +33,12 @@ class UserController {
 
     async activate(req, res, next) {
         try {
-
+            const activationLink = req.params.link
+            UserService.activate(activationLink)
         } catch (e) {
-
+            console.log(e)
         }
+        return res.json("Activated")
     }
 
     async refresh(req, res, next) {
