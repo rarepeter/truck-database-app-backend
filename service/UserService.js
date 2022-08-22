@@ -15,14 +15,14 @@ class UserService {
 
         const user = await User.create({ email, password: hashedPassword, activationLink })
         // await mailService.sendActivationMail(email, `${process.env.SRV_ADDRESS}/activate/${activationLink}`)
-        
+
         const userDto = new UserDto(user)
         const tokens = TokenService.generateTokens({ ...userDto })
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
-        
+
         return { ...tokens, user: userDto }
     }
-    
+
     async activate(activationLink) {
         const user = await User.findOne({ activationLink })
         if (!user) {
@@ -52,6 +52,26 @@ class UserService {
     async logout(refreshToken) {
         const token = await TokenService.removeToken(refreshToken)
         return token
+    }
+
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw new Erorr('Could not refresh token')
+        }
+        const userData = TokenService.validateRefreshToken(refreshToken)
+        const fetchedToken = await TokenService.findToken(refreshToken)
+        if (!userData || !fetchedToken) {
+            throw new Error('Token not found')
+        }
+
+        const user = await User.findById(userData.id)
+
+        const userDto = new UserDto(user)
+        const tokens = TokenService.generateTokens({ ...userDto })
+
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+        return { ...tokens, user: userDto }
     }
 }
 
