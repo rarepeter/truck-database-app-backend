@@ -1,7 +1,7 @@
 import User from "../schemas/User.js"
 import bcrypt from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid'
-import mailService from './MailService.js'
+// import mailService from './MailService.js'
 import TokenService from "./TokenService.js"
 import UserDto from "../dtos/UserDTO.js"
 class UserService {
