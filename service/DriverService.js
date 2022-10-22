@@ -4,7 +4,6 @@ import Driver from '../schemas/Driver.js'
 
 class DriverService {
     async create(driver) {
-        console.log(driver)
         const { firstName, lastName, passportId } = driver;
         const newDriver = {
             id: uuidv4(),

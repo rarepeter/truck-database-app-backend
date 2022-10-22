@@ -10,7 +10,7 @@ const Driver = new mongoose.Schema({
     passportId: { type: String, required: true },
     assignedTrucks: { type: Array, default: [] },
     picture: { type: String },
-}, { timestamps: true }
+}, { timestamps: true, collection: 'drivers' }
 )
 
-export default mongoose.model(process.env.DRIVERS_NS, Driver)
+export default mongoose.model("Driver", Driver)

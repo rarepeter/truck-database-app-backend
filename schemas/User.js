@@ -5,6 +5,6 @@ const User = new mongoose.Schema({
     password: { type: String, required: true },
     isActivated: { type: Boolean, default: false },
     activationLink: { type: String }
-})
+}, { collection: 'users' })
 
 export default mongoose.model('User', User);

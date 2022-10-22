@@ -9,7 +9,7 @@ const Delivery = new mongoose.Schema({
     assignedTrucks: { type: String, required: true },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true }
-}, { timestamps: true }
+}, { timestamps: true, collection: 'deliveries' }
 )
 
-export default mongoose.model(process.env.DELIVERIES_NS, Delivery)
+export default mongoose.model("Delivery", Delivery)

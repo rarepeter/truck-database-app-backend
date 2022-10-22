@@ -1,4 +1,3 @@
-import { startConnection } from '../routers/router.js'
 import DriverService from '../service/DriverService.js'
 
 class DriverController {

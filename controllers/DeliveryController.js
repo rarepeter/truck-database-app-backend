@@ -1,4 +1,3 @@
-import { startConnection } from '../routers/router.js'
 import DeliveryService from '../service/DeliveryService.js'
 
 class DeliveryController {

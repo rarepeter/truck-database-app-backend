@@ -12,7 +12,6 @@ class DeliveryService {
             startTime,
             endTime
         }
-        console.log(newDelivery);
         const createdDelivery = await Delivery.create(newDelivery)
         return createdDelivery
     }

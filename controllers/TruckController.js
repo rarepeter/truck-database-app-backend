@@ -1,4 +1,3 @@
-import { startConnection } from '../routers/router.js'
 import TruckService from '../service/TruckService.js'
 
 class TruckController {
@@ -7,7 +6,6 @@ class TruckController {
             const createdTruck = await TruckService.create(req.body)
             console.log(createdTruck)
             req.ui = createdTruck.id
-            console.log(req.ui)
             return res.status(201).json(createdTruck)
         } catch (e) {
             console.log(e)

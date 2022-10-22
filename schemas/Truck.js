@@ -12,7 +12,7 @@ const Truck = new mongoose.Schema({
     color: { type: String, required: true },
     picture: { type: String },
     activeDrivers: { type: String, default: '' }
-}, { timestamps: true }
+}, { timestamps: true, collection: 'trucks' }
 )
 
-export default mongoose.model(process.env.TRUCKS_NS, Truck)
+export default mongoose.model("Truck", Truck)
