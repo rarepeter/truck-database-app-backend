@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 // import mailService from './MailService.js'
 import TokenService from "./TokenService.js"
 import UserDto from "../dtos/UserDTO.js"
+
 class UserService {
     async registration(email, password) {
         const candidate = await User.findOne({ email })
@@ -38,7 +39,7 @@ class UserService {
             throw new Error("User not found")
         }
         const isPassEqual = bcrypt.compare(password, user.password)
-        if (!user) {
+        if (!isPassEqual) {
             throw new Error("Password is incorrect")
         }
         const userDto = new UserDto(user)
